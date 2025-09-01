@@ -4,7 +4,6 @@ import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { Mail, Lock, Eye, EyeOff } from 'lucide-react'
 import Link from 'next/link'
-import styles from './Auth.module.css'
 
 export default function LoginPage() {
   const [formData, setFormData] = useState({
@@ -52,22 +51,22 @@ export default function LoginPage() {
   }
 
   return (
-    <div className={styles.container}>
-      <div className={styles.authCard}>
-        <div className={styles.header}>
-          <h1>Welcome Back</h1>
-          <p>Sign in to your Shizuru account</p>
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-black to-gray-900 p-8">
+      <div className="bg-gray-900 border border-gray-800 rounded-2xl p-12 w-full max-w-md shadow-2xl">
+        <div className="text-center mb-8">
+          <h1 className="text-white text-3xl font-bold mb-2">Welcome Back</h1>
+          <p className="text-gray-400">Sign in to your Shizuru account</p>
         </div>
 
-        <form onSubmit={handleSubmit} className={styles.form}>
+        <form onSubmit={handleSubmit} className="flex flex-col gap-6">
           {error && (
-            <div className={styles.error}>
+            <div className="bg-red-900/20 border border-red-500 text-red-200 p-3 rounded-lg text-center text-sm">
               {error}
             </div>
           )}
 
-          <div className={styles.inputGroup}>
-            <Mail className={styles.inputIcon} size={20} />
+          <div className="relative flex items-center">
+            <Mail className="absolute left-4 text-gray-500 z-10" size={20} />
             <input
               type="email"
               name="email"
@@ -75,13 +74,13 @@ export default function LoginPage() {
               value={formData.email}
               onChange={handleInputChange}
               required
-              className={styles.input}
+              className="w-full pl-12 pr-4 py-4 bg-gray-800 border border-gray-700 rounded-lg text-white focus:outline-none focus:border-purple-500 transition-colors"
               data-testid="input-email"
             />
           </div>
 
-          <div className={styles.inputGroup}>
-            <Lock className={styles.inputIcon} size={20} />
+          <div className="relative flex items-center">
+            <Lock className="absolute left-4 text-gray-500 z-10" size={20} />
             <input
               type={showPassword ? 'text' : 'password'}
               name="password"
@@ -89,12 +88,12 @@ export default function LoginPage() {
               value={formData.password}
               onChange={handleInputChange}
               required
-              className={styles.input}
+              className="w-full pl-12 pr-12 py-4 bg-gray-800 border border-gray-700 rounded-lg text-white focus:outline-none focus:border-purple-500 transition-colors"
               data-testid="input-password"
             />
             <button
               type="button"
-              className={styles.togglePassword}
+              className="absolute right-4 text-gray-500 hover:text-purple-400 transition-colors z-10"
               onClick={() => setShowPassword(!showPassword)}
               data-testid="button-toggle-password"
             >
@@ -105,25 +104,27 @@ export default function LoginPage() {
           <button
             type="submit"
             disabled={isLoading}
-            className={styles.submitButton}
+            className="w-full py-4 bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-700 hover:to-purple-800 text-white rounded-lg font-semibold transition-all duration-200 hover:-translate-y-0.5 disabled:opacity-60 disabled:cursor-not-allowed disabled:transform-none"
             data-testid="button-submit"
           >
             {isLoading ? 'Signing in...' : 'Sign In'}
           </button>
         </form>
 
-        <div className={styles.links}>
-          <Link href="/auth/forgot-password" className={styles.link} data-testid="link-forgot-password">
+        <div className="text-center mt-4">
+          <Link href="/auth/forgot-password" className="text-purple-400 hover:text-purple-300 text-sm transition-colors" data-testid="link-forgot-password">
             Forgot your password?
           </Link>
         </div>
 
-        <div className={styles.divider}>
-          <span>or</span>
+        <div className="flex items-center my-6">
+          <div className="flex-1 h-px bg-gray-700"></div>
+          <span className="px-4 text-gray-500 text-sm">or</span>
+          <div className="flex-1 h-px bg-gray-700"></div>
         </div>
 
-        <Link href="/api/auth/anilist" className={styles.anilistButton} data-testid="link-anilist-login">
-          <svg viewBox="0 0 172 172" className={styles.anilistIcon}>
+        <Link href="/api/auth/anilist" className="flex items-center justify-center gap-3 w-full py-4 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-semibold transition-all duration-200 hover:-translate-y-0.5" data-testid="link-anilist-login">
+          <svg viewBox="0 0 172 172" className="w-5 h-5 fill-current">
             <path d="M111.322,111.157 L111.322,41.029 C111.322,37.010 109.105,34.792 105.086,34.792 L91.365,34.792 C87.346,34.792 85.128,37.010 85.128,41.029 L85.128,111.157 L111.322,111.157 Z M24.234,111.157 L49.322,111.157 L73.870,111.157 L49.322,155.444 L24.234,111.157 Z"/>
           </svg>
           Continue with AniList
