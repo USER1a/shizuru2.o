@@ -2,7 +2,6 @@
 
 import React, { useState, useEffect } from 'react'
 import { X, CheckCircle, AlertCircle, Info, AlertTriangle } from 'lucide-react'
-import styles from './Toast.module.css'
 
 export interface ToastProps {
   id: string
@@ -52,21 +51,58 @@ export function Toast({
     }
   }
 
+  const getTypeStyles = () => {
+    switch (type) {
+      case 'success':
+        return 'border-l-green-500 bg-green-900/20'
+      case 'error':
+        return 'border-l-red-500 bg-red-900/20'
+      case 'warning':
+        return 'border-l-yellow-500 bg-yellow-900/20'
+      case 'info':
+        return 'border-l-blue-500 bg-blue-900/20'
+      case 'reminder':
+        return 'border-l-purple-500 bg-purple-900/20'
+      default:
+        return 'border-l-gray-500 bg-gray-900/20'
+    }
+  }
+
+  const getIconStyles = () => {
+    switch (type) {
+      case 'success':
+        return 'bg-green-500/20 text-green-400'
+      case 'error':
+        return 'bg-red-500/20 text-red-400'
+      case 'warning':
+        return 'bg-yellow-500/20 text-yellow-400'
+      case 'info':
+        return 'bg-blue-500/20 text-blue-400'
+      case 'reminder':
+        return 'bg-purple-500/20 text-purple-400'
+      default:
+        return 'bg-gray-500/20 text-gray-400'
+    }
+  }
+
   return (
-    <div className={`${styles.toast} ${styles[type]}`} data-testid={`toast-${type}`}>
-      <div className={styles.icon}>
+    <div 
+      className={`flex items-start gap-3 min-w-80 max-w-md p-4 mb-3 rounded-lg border-l-4 backdrop-blur-sm transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg animate-in slide-in-from-right ${getTypeStyles()}`}
+      data-testid={`toast-${type}`}
+    >
+      <div className={`flex items-center justify-center w-6 h-6 rounded-full flex-shrink-0 ${getIconStyles()}`}>
         {getIcon()}
       </div>
-      <div className={styles.content}>
-        <h4 className={styles.title} data-testid="text-toast-title">{title}</h4>
-        {message && <p className={styles.message} data-testid="text-toast-message">{message}</p>}
+      <div className="flex-1 min-w-0">
+        <h4 className="text-white text-sm font-semibold mb-1" data-testid="text-toast-title">{title}</h4>
+        {message && <p className="text-gray-300 text-sm leading-relaxed" data-testid="text-toast-message">{message}</p>}
         {actions && actions.length > 0 && (
-          <div className={styles.actions}>
+          <div className="flex gap-2 mt-3">
             {actions.map((action, index) => (
               <button
                 key={index}
                 onClick={action.onClick}
-                className={styles.actionButton}
+                className="px-3 py-1.5 bg-white/10 hover:bg-white/20 text-white text-xs font-medium rounded transition-colors"
                 data-testid={`button-toast-action-${index}`}
               >
                 {action.label}
@@ -77,7 +113,7 @@ export function Toast({
       </div>
       <button
         onClick={() => onClose(id)}
-        className={styles.closeButton}
+        className="text-gray-400 hover:text-white p-1 rounded transition-colors flex-shrink-0"
         data-testid="button-close-toast"
       >
         <X size={16} />
@@ -112,9 +148,11 @@ export function ToastProvider({ children }: { children: React.ReactNode }) {
   return (
     <ToastContext.Provider value={{ showToast }}>
       {children}
-      <div className={styles.container}>
+      <div className="fixed top-5 right-5 z-50 pointer-events-none max-h-screen overflow-y-auto flex flex-col items-end">
         {toasts.map(toast => (
-          <Toast key={toast.id} {...toast} />
+          <div key={toast.id} className="pointer-events-auto">
+            <Toast {...toast} />
+          </div>
         ))}
       </div>
     </ToastContext.Provider>

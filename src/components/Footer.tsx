@@ -1,88 +1,87 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { Github } from 'lucide-react'
-import styles from './Footer.module.css'
 
 export default function Footer() {
   const currentYear = new Date().getFullYear()
 
   return (
-    <footer className={styles.footer}>
-      <div className={styles.container}>
-        <div className={styles.grid}>
-          <div className={styles.brandSection}>
-            <Link href="/" className={styles.logoLink}>
+    <footer className="bg-black border-t border-gray-800 mt-auto py-12">
+      <div className="max-w-6xl mx-auto px-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+          <div className="flex flex-col gap-4">
+            <Link href="/" className="inline-block w-fit">
               <Image
                 src="/icons/favicon-32x32.png"
                 alt="Shizuru Logo"
                 width={40}
                 height={40}
-                className={styles.logoImage}
+                className="rounded-lg"
               />
             </Link>
-            <p className={styles.brandDescription}>
+            <p className="text-gray-400 text-sm leading-relaxed">
               Your ultimate destination for anime and manga. Experience seamless streaming with our modern, fast, and intuitive platform designed for the community.
             </p>
           </div>
 
-          <div className={styles.section}>
-            <h3 className={styles.sectionTitle}>Navigation</h3>
-            <ul className={styles.linkList}>
-              <li className={styles.linkItem}>
-                <Link href="/" className={styles.link}>Home</Link>
+          <div className="flex flex-col gap-4">
+            <h3 className="text-white text-lg font-semibold">Navigation</h3>
+            <ul className="flex flex-col gap-2">
+              <li>
+                <Link href="/" className="text-gray-400 text-sm hover:text-purple-400 transition-colors">Home</Link>
               </li>
-              <li className={styles.linkItem}>
-                <Link href="/discover" className={styles.link}>Discover</Link>
+              <li>
+                <Link href="/discover" className="text-gray-400 text-sm hover:text-purple-400 transition-colors">Discover</Link>
               </li>
-              <li className={styles.linkItem}>
-                <Link href="/schedule" className={styles.link}>Schedule</Link>
+              <li>
+                <Link href="/schedule" className="text-gray-400 text-sm hover:text-purple-400 transition-colors">Schedule</Link>
               </li>
-              <li className={styles.linkItem}>
-                <Link href="/manga" className={styles.link}>Manga</Link>
+              <li>
+                <Link href="/manga" className="text-gray-400 text-sm hover:text-purple-400 transition-colors">Manga</Link>
               </li>
             </ul>
           </div>
 
-          <div className={styles.section}>
-            <h3 className={styles.sectionTitle}>Community</h3>
-            <ul className={styles.linkList}>
-              <li className={styles.linkItem}>
+          <div className="flex flex-col gap-4">
+            <h3 className="text-white text-lg font-semibold">Community</h3>
+            <ul className="flex flex-col gap-2">
+              <li>
                 <Link 
                   href="https://dcd.gg/shizuru" 
                   target="_blank" 
                   rel="noopener noreferrer" 
-                  className={styles.socialLink}
+                  className="flex items-center gap-2 text-gray-400 text-sm hover:text-purple-400 transition-colors"
                 >
-                  <span className={styles.socialText}>Discord</span>
+                  <span>Discord</span>
                 </Link>
               </li>
-              <li className={styles.linkItem}>
+              <li>
                 <Link 
                   href="#" 
                   target="_blank" 
                   rel="noopener noreferrer" 
-                  className={styles.socialLink}
+                  className="flex items-center gap-2 text-gray-400 text-sm hover:text-purple-400 transition-colors"
                 >
-                  <span className={styles.socialText}>Twitter</span>
+                  <span>Twitter</span>
                 </Link>
               </li>
-              <li className={styles.linkItem}>
+              <li>
                 <Link 
                   href="#" 
                   target="_blank" 
                   rel="noopener noreferrer" 
-                  className={styles.socialLink}
+                  className="flex items-center gap-2 text-gray-400 text-sm hover:text-purple-400 transition-colors"
                 >
-                  <Github className={styles.socialIcon} />
-                  <span className={styles.socialText}>GitHub</span>
+                  <Github size={16} />
+                  <span>GitHub</span>
                 </Link>
               </li>
             </ul>
           </div>
         </div>
 
-        <div className={styles.bottom}>
-          <p className={styles.copyright}>
+        <div className="border-t border-gray-800 pt-8 text-center">
+          <p className="text-gray-500 text-sm">
             © {currentYear} Shizuru. All rights reserved.
           </p>
         </div>
